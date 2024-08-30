@@ -12,11 +12,18 @@ const NetflixRouter = require("./routes/NetflixRoutes");
 const userRoutes = require("./routes/usersRoutes");
 const sendNotification = require("./firebase/sendNotification");
 
+const corsOptions = {
+  origin: "*",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  allowedHeaders: "Content-Type,Authorization",
+};
+
 // middlewares
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(morgan("dev"));
 app.use(cookieParser());
-app.use(cors());
+
 
 // routes middllware
 app.use("/api", NetflixRouter);
