@@ -153,7 +153,7 @@ exports.resendToken = async (req, res) => {
       <h2>Hello <strong>${email.fullname}</strong>, <br/></h2> 
       <p style='font-size:20px;'>your account has been created.Activate your account to continue</p>
       <br>
-      your activation url is http://localhost:8000/api/activation/${token.token}
+      your activation url is https://movies-backend-six.vercel.app/api/activation/${token.token}
       <button style='padding:10px; background-color:dodgerblue; cursor:pointer; border:none; ouline:none'><span style='color:#fff; font-size:16px;'>Activate your account</span></button>
       </div>
     `,
