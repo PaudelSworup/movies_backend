@@ -35,6 +35,7 @@
     <script>
         function loadAPI(){
             const currentUrl = window.location.href;
+            alert(currentUrl)
             const segments = currentUrl.split('/');
             const token = segments.pop();  // Gets the last segment of the URL
             console.log("Last Token:", token);
