@@ -26,14 +26,14 @@
         }
     </style>
 </head>
-<body>
+<body onload="loadAPI()">
     <div class="container">
         <h1>Account Activation</h1>
         <p class="message" id="response-message">Activating your account...</p>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        function loadAPI(){
             const currentUrl = window.location.href;
             const segments = currentUrl.split('/');
             const token = segments.pop();  // Gets the last segment of the URL
@@ -66,7 +66,7 @@
                 document.getElementById('response-message').innerText = 'An error occurred. Please try again later.';
                 console.error('Error:', error);  // Log the error for debugging
             });
-        });
+        }
     </script>
 </body>
 </html>
