@@ -7,6 +7,7 @@ require("./database/DB_connection");
 
 const morgan = require("morgan");
 const cors = require("cors");
+const path = require("path")
 
 const NetflixRouter = require("./routes/NetflixRoutes");
 const userRoutes = require("./routes/usersRoutes");
@@ -16,10 +17,12 @@ const corsOptions = {
   origin: "*",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   allowedHeaders: "Content-Type,Authorization",
+
 };
 
 // middlewares
 app.use(cors(corsOptions));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.json());
 app.use(morgan("dev"));
 app.use(cookieParser());
@@ -32,6 +35,11 @@ app.use("/api", userRoutes);
 // setTimeout(()=>{
 //   sendNotification()
 // }, 3000);
+
+//for testing
+app.get("/api/activation/:token", function (req, res) {
+  res.sendFile(path.join(__dirname, "public", "Activation.html"));
+});
 
 // server start code
 const port = process.env.PORT || 3002;
