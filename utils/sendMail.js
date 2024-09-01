@@ -1,15 +1,19 @@
 const nodemailer = require("nodemailer");
 
+const hostData = process.env.GMAIL_HOST ?? "";
+const port= process.env.GMAIL_PORT ?? "";
+
 const sendEmail = (options) => {
   const transport = nodemailer.createTransport({
-    service:"gmail",
-    host: process.env.GMAIL_HOST,
-    port: process.env.GMAIL_PORT,
+    service: "gmail",
+    host: hostData,
+    port: port,
+    secure: false,
     auth: {
       user: process.env.GMAIL_USER,
       pass: process.env.APP_PASSWORD,
     },
-  });
+  } );
 
   const mailOptions = {
     from: options.from,
@@ -17,14 +21,15 @@ const sendEmail = (options) => {
     subject: options.subject,
     text: options.text,
     html: options.html,
-    // attachments:[options.attachments]
   };
 
-  if (JSON.stringify([options.attachments]) === JSON.stringify([undefined])) {
-    return transport.sendMail(mailOptions);
-  } else mailOptions.attachments = [options.attachments];
-
-  transport.sendMail(mailOptions);
+  transport.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error("Error sending email:", error);
+    } else {
+      console.log("Email sent:", info);
+    }
+  });
 };
 
 module.exports = sendEmail;

@@ -42,21 +42,11 @@ exports.registerAccount = async (req, res) => {
       <h2>Hello <strong>${users.username}</strong>, <br/></h2> 
       <p style='font-size:20px;'>your account has been created.Activate your account to continue</p>
       <br>
-      <p>your activation url is http://localhost:8000/api/activation/${token.token}</p>
+      <p>your activation url is https://movies-backend-six.vercel.app/api/activation/${token.token}</p>
       <br/>
       <button style='padding:10px; background-color:dodgerblue; cursor:pointer; border:none; ouline:none'><span style='color:#fff; font-size:16px;'>Activate your account</span></button>
     `,
-    //   html: `
-    //   <div style='display:flex; flex-direction:column; justify-content:center; align-items:start'>
-    //   <h2>Account creation successful</h2>
-    //   <h2>Hello <strong>${users.username}</strong>, <br/></h2>
-    //   <p style='font-size:20px;'>your account has been created.Activate your account to continue</p>
-    //   <br>
-    //   your activation url is http://localhost:8000/api/activation/${token.token}
-    //   <button style='padding:10px; background-color:dodgerblue; cursor:pointer; border:none; ouline:none'><span style='color:#fff; font-size:16px;'>Activate your account</span></button>
-    //   </div>
-    // `,
-    });
+    })
     return res.status(200).json({
       success: true,
       message: "User account has been created, verify it to continue",
@@ -157,7 +147,7 @@ exports.resendToken = async (req, res) => {
       <button style='padding:10px; background-color:dodgerblue; cursor:pointer; border:none; ouline:none'><span style='color:#fff; font-size:16px;'>Activate your account</span></button>
       </div>
     `,
-    });
+    })
     return res.status(statusCode).send({
       success: true,
       message: "Activation link has been sent to your mail",
