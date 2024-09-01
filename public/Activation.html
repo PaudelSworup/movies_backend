@@ -34,39 +34,51 @@
 
     <script>
         function loadAPI(){
-            const currentUrl = window.location.href;
-            alert(currentUrl)
-            const segments = currentUrl.split('/');
-            const token = segments.pop();  // Gets the last segment of the URL
-            console.log("Last Token:", token);
+            try {
+                alert("Testing alert functionality");
 
+                const currentUrl = window.location.href;
+                console.log("Current URL:", currentUrl);
 
-            if (!token) {
-                document.getElementById('response-message').innerText = 'No token provided. Please check the activation link.';
-                return;
+                const segments = currentUrl.split('/');
+                const token = segments.pop();  // Gets the last segment of the URL
+                console.log("Extracted Token:", token);
+
+                if (!token) {
+                    document.getElementById('response-message').innerText = 'No token provided. Please check the activation link.';
+                    return;
+                }
+
+                const activationUrl = `https://movies-backend-six.vercel.app/api/activation/${token}`;
+                console.log("Activation URL:", activationUrl);
+
+                fetch(activationUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    console.log("Response Status:", response.status);
+                    return response.json();
+                })
+                .then(data => {
+                    console.log("Response Data:", data);
+                    if (data?.success) {
+                        document.getElementById('response-message').innerText = data?.message || 'Account activated successfully!';
+                    } else {
+                        document.getElementById('response-message').innerText = data?.error || 'An error occurred. Please try again later.';
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('response-message').innerText = 'An error occurred. Please try again later.';
+                    console.error('Fetch Error:', error);
+                });
+
+            } catch (error) {
+                document.getElementById('response-message').innerText = 'An unexpected error occurred.';
+                console.error('Script Error:', error);
             }
-
-            const activationUrl = `https://movies-backend-six.vercel.app/api/activation/${token}`;
-
-
-            fetch(activationUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data?.success) {
-                    document.getElementById('response-message').innerText = data?.message || 'Account activated successfully!';
-                } else {
-                    document.getElementById('response-message').innerText = data?.error || 'An error occurred. Please try again later.';
-                }
-            })
-            .catch(error => {
-                document.getElementById('response-message').innerText = 'An error occurred. Please try again later.';
-                console.error('Error:', error);  // Log the error for debugging
-            });
         }
     </script>
 </body>
