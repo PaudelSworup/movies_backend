@@ -34,14 +34,21 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const token = urlParams.get('token');
-            console.log(token)
+            const currentUrl = window.location.href;
+            const segments = currentUrl.split('/');
+            const token = segments.pop();  // Gets the last segment of the URL
+            console.log("Last Token:", token);
+
+
+            if (!token) {
+                document.getElementById('response-message').innerText = 'No token provided. Please check the activation link.';
+                return;
+            }
+
             const activationUrl = `https://movies-backend-six.vercel.app/api/activation/${token}`;
-            // const localurlUrl = `http://localhost:8000/api/activation/${token}`;
 
 
-            fetch(localurlUrl, {
+            fetch(activationUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -49,15 +56,15 @@
             })
             .then(response => response.json())
             .then(data => {
-                console.log(data)
-              if(data?.success === true){
-                document.getElementById('response-message').innerText = data?.message || 'Account Activated successfully';
-              }else{
-                document.getElementById('response-message').innerText = data?.error || 'An error occurred. Please try again later.';
-              }
+                if (data?.success) {
+                    document.getElementById('response-message').innerText = data?.message || 'Account activated successfully!';
+                } else {
+                    document.getElementById('response-message').innerText = data?.error || 'An error occurred. Please try again later.';
+                }
             })
             .catch(error => {
-                document.getElementById('response-message').innerText = error || 'An error occurred. Please try again later.';
+                document.getElementById('response-message').innerText = 'An error occurred. Please try again later.';
+                console.error('Error:', error);  // Log the error for debugging
             });
         });
     </script>
