@@ -50,7 +50,7 @@ exports.registerAccount = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "User account has been created, verify it to continue",
-      response
+      response:`response ${response}`
     });
   } catch (err) {
     return res.status(400).json({ success: false, error: err.message });
