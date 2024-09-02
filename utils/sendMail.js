@@ -22,8 +22,10 @@ const sendEmail = (options) => {
   transport.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.error("Error sending email:", error);
+      return error
     } else {
       console.log("Email sent:", info);
+      return info
     }
   });
 };

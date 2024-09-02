@@ -33,7 +33,7 @@ exports.registerAccount = async (req, res) => {
       throw new Error("Something went wrong!");
     }
 
-    sendEmail({
+   const response =  sendEmail({
       from: "NETFLIX <netflix.mov.np>",
       to: users.email,
       subject: "User Registration",
@@ -50,6 +50,7 @@ exports.registerAccount = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "User account has been created, verify it to continue",
+      response
     });
   } catch (err) {
     return res.status(400).json({ success: false, error: err.message });
