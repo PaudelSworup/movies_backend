@@ -33,24 +33,23 @@ exports.registerAccount = async (req, res) => {
       throw new Error("Something went wrong!");
     }
 
-   const response =  sendEmail({
-      from: "NETFLIX <netflix.mov.np>",
-      to: users.email,
-      subject: "User Registration",
-      html: `  
-      <h2>Account creation successful</h2>
-      <h2>Hello <strong>${users.username}</strong>, <br/></h2> 
-      <p style='font-size:20px;'>your account has been created.Activate your account to continue</p>
-      <br>
-      <p>your activation url is https://movies-backend-six.vercel.app/api/activation/${token.token}</p>
-      <br/>
-      <button style='padding:10px; background-color:dodgerblue; cursor:pointer; border:none; ouline:none'><span style='color:#fff; font-size:16px;'>Activate your account</span></button>
-    `,
-    })
+  //  const response =  sendEmail({
+  //     from: "NETFLIX <netflix.mov.np>",
+  //     to: users.email,
+  //     subject: "User Registration",
+  //     html: `  
+  //     <h2>Account creation successful</h2>
+  //     <h2>Hello <strong>${users.username}</strong>, <br/></h2> 
+  //     <p style='font-size:20px;'>your account has been created.Activate your account to continue</p>
+  //     <br>
+  //     <p>your activation url is https://movies-backend-six.vercel.app/api/activation/${token.token}</p>
+  //     <br/>
+  //     <button style='padding:10px; background-color:dodgerblue; cursor:pointer; border:none; ouline:none'><span style='color:#fff; font-size:16px;'>Activate your account</span></button>
+  //   `,
+  //   })
     return res.status(200).json({
       success: true,
       message: "User account has been created, verify it to continue",
-      response:`response ${response}`
     });
   } catch (err) {
     return res.status(400).json({ success: false, error: err.message });
