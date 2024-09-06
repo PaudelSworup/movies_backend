@@ -3,7 +3,7 @@ const SingleMovies = require("../Reusable Func/getSingleMovies");
 
 exports.getTrending = async (req, res) => {
   try {
-    const trending = await Fetch_API.Trending();
+    const trending = await Fetch_API.Trending(req.params.page);
     if (!trending) {
       throw new Error("Something went wrong");
     }
@@ -15,7 +15,7 @@ exports.getTrending = async (req, res) => {
 
 exports.getNetflixOriginals = async (req, res) => {
   try {
-    const originals = await Fetch_API.netflixOriginals();
+    const originals = await Fetch_API.netflixOriginals(req.params.page);
     if (!originals) {
       throw new Error("Something went wrong");
     }
@@ -27,7 +27,7 @@ exports.getNetflixOriginals = async (req, res) => {
 
 exports.getPopular = async (req, res) => {
   try {
-    const popular = await Fetch_API.popular();
+    const popular = await Fetch_API.popular(req.params.page);
     if (!popular) {
       throw new Error("Something went wrong");
     }
@@ -39,7 +39,7 @@ exports.getPopular = async (req, res) => {
 
 exports.gettopRated = async (req, res) => {
   try {
-    const rated = await Fetch_API.topRated();
+    const rated = await Fetch_API.topRated(req.params.page);
     if (!rated) {
       throw new Error("Something went wrong");
     }
@@ -51,7 +51,7 @@ exports.gettopRated = async (req, res) => {
 
 exports.getnowPlaying = async (req, res) => {
   try {
-    const nowPlaying = await Fetch_API.nowPlaying();
+    const nowPlaying = await Fetch_API.nowPlaying(req.params.page);
     if (!nowPlaying) {
       throw new Error("Something went wrong");
     }
@@ -63,7 +63,7 @@ exports.getnowPlaying = async (req, res) => {
 
 exports.getUpcoming = async (req, res) => {
   try {
-    const upcoming = await Fetch_API.upComing();
+    const upcoming = await Fetch_API.upComing(req.params.page);
     if (!upcoming) {
       throw new Error("Something went wrong");
     }
@@ -75,7 +75,7 @@ exports.getUpcoming = async (req, res) => {
 
 exports.getAction = async (req, res) => {
   try {
-    const action = await Fetch_API.actionMovies();
+    const action = await Fetch_API.actionMovies(req.params.page);
     if (!action) {
       throw new Error("Something went wrong");
     }
@@ -87,7 +87,7 @@ exports.getAction = async (req, res) => {
 
 exports.getComedy = async (req, res) => {
   try {
-    const comedy = await Fetch_API.comedyMovies();
+    const comedy = await Fetch_API.comedyMovies(req.params.page);
     if (!comedy) {
       throw new Error("Something went wrong");
     }
@@ -99,7 +99,7 @@ exports.getComedy = async (req, res) => {
 
 exports.getMystery = async (req, res) => {
   try {
-    const mystery = await Fetch_API.mysteryMovies();
+    const mystery = await Fetch_API.mysteryMovies(req.params.page);
     if (!mystery) {
       throw new Error("Something went wrong");
     }
@@ -111,7 +111,7 @@ exports.getMystery = async (req, res) => {
 
 exports.getHorror = async (req, res) => {
   try {
-    const horror = await Fetch_API.horrorMovies();
+    const horror = await Fetch_API.horrorMovies(req.params.page);
     if (!horror) {
       throw new Error("Something went wrong");
     }
@@ -123,7 +123,7 @@ exports.getHorror = async (req, res) => {
 
 exports.getRomance = async (req, res) => {
   try {
-    const romance = await Fetch_API.romanceMovies();
+    const romance = await Fetch_API.romanceMovies(req.params.page);
     if (!romance) {
       throw new Error("Something went wrong");
     }
@@ -135,7 +135,7 @@ exports.getRomance = async (req, res) => {
 
 exports.getSCIFI = async (req, res) => {
   try {
-    const scifi = await Fetch_API.scfiMovies();
+    const scifi = await Fetch_API.scfiMovies(req.params.page);
     if (!scifi) {
       throw new Error("Something went wrong");
     }
@@ -147,7 +147,7 @@ exports.getSCIFI = async (req, res) => {
 
 exports.getWestern = async (req, res) => {
   try {
-    const western = await Fetch_API.westernMovies();
+    const western = await Fetch_API.westernMovies(req.params.page);
     if (!western) {
       throw new Error("Something went wrong");
     }
@@ -159,7 +159,7 @@ exports.getWestern = async (req, res) => {
 
 exports.getAnimation = async (req, res) => {
   try {
-    const animation = await Fetch_API.animationMovies();
+    const animation = await Fetch_API.animationMovies(req.params.page);
     if (!animation) {
       throw new Error("Something went wrong");
     }
@@ -171,7 +171,7 @@ exports.getAnimation = async (req, res) => {
 
 exports.getTvShows = async (req, res) => {
   try {
-    const tv = await Fetch_API.fetchTV();
+    const tv = await Fetch_API.fetchTV(req.params.page);
     if (!tv) {
       throw new Error("Something went wrong");
     }
@@ -240,3 +240,4 @@ exports.getVideo = async (req, res) => {
     return res.status(400).json({ success: false, error: err.message });
   }
 };
+
