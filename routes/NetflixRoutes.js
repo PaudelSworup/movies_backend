@@ -20,6 +20,8 @@ const {
   getSCIFI,
   getMystery,
   getVideo,
+  recordTrailer,
+  getRecordTrailer,
 } = require("../controllers/NetflixController");
 const router = express.Router();
 
@@ -43,5 +45,7 @@ router.get("/recommendations/:id", getRecommedations);
 router.get("/similar/:id", getSimilar);
 router.get("/credits/:id", getCasts);
 router.get("/videos/:id", getVideo);
+router.post("/recordtrailer", recordTrailer);
+router.get("/gettrailer/:id", getRecordTrailer);
 
 module.exports = router;

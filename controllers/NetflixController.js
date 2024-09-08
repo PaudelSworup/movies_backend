@@ -1,3 +1,4 @@
+const Trailer = require("../models/TrailerModel");
 const Fetch_API = require("../Reusable Func/FetchAPI");
 const SingleMovies = require("../Reusable Func/getSingleMovies");
 
@@ -241,3 +242,51 @@ exports.getVideo = async (req, res) => {
   }
 };
 
+exports.recordTrailer = async (req, res) => {
+  try {
+    const { trailerName, userId, image, movieId } = req.body;
+
+    console.log(image, trailerName, userId, movieId);
+    const existingView = await Trailer.findOne({ userId, trailerName });
+
+    if (existingView) {
+      console.log("already watched");
+      return;
+    }
+
+    // Create a new trailer record
+    const trailer = new Trailer({
+      movieId,
+      image,
+      trailerName,
+      userId,
+    });
+
+    await trailer.save();
+
+    return res.status(200).json({ success: true, message: "trailer recorded" });
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json({ success: false, error: err.message });
+  }
+};
+
+exports.getRecordTrailer = async (req, res) => {
+  try {
+    const trailer = await Trailer.find(
+      { userId: req.params.id },
+      "trailerName userId image movieId"
+    );
+
+    if (!trailer) {
+      return res
+        .status(400)
+        .json({ success: false, error: "something went wrong" });
+    }
+
+    return res.status(200).json({ success: true, movies: trailer });
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json({ success: false, error: err.message });
+  }
+};
