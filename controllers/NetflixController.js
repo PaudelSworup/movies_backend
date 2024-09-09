@@ -251,7 +251,7 @@ exports.recordTrailer = async (req, res) => {
 
     if (existingView) {
       console.log("already watched");
-      return;
+      return res.status(400).json({ success: false, error: "already watched" });
     }
 
     // Create a new trailer record
