@@ -8,6 +8,7 @@ require("./database/DB_connection");
 const morgan = require("morgan");
 const cors = require("cors");
 const path = require("path");
+const timeout = require("connect-timeout");
 
 const NetflixRouter = require("./routes/NetflixRoutes");
 const userRoutes = require("./routes/usersRoutes");
@@ -30,6 +31,7 @@ app.use(cookieParser());
 // routes middllware
 app.use("/api", NetflixRouter);
 app.use("/api", userRoutes);
+app.use(timeout("20s"));
 
 // setTimeout(()=>{
 //   sendNotification()
