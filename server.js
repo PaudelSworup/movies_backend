@@ -33,8 +33,8 @@ app.use("/api", NetflixRouter);
 app.use("/api", userRoutes);
 app.use(timeout("20s"));
 
-// setTimeout(()=>{
-//   sendNotification()
+// setTimeout(() => {
+//   sendNotification();
 // }, 3000);
 
 //for testing
